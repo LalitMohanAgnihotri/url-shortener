@@ -1,0 +1,122 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container */
+.container {
+  max-width: 600px;
+  width: 92%;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border-radius: 8px;
+}
+
+/* Headings */
+h1, h2 {
+  text-align: center;
+  color: #333;
+}
+
+/* Form */
+form div {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+/* Inputs */
+input[type="url"],
+input[type="text"] {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+/* Button */
+.btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+button {
+  width: 100%;
+  max-width: 220px;
+  background-color: #4a90e2;
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #357ab8;
+}
+
+/* Shortened URL list */
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+li {
+  background-color: #fafafa;
+  margin-bottom: 10px;
+  padding: 12px;
+  border-radius: 6px;
+  word-break: break-all;
+  text-align: center;
+}
+
+li a {
+  text-decoration: none;
+  color: #4a90e2;
+  font-weight: 500;
+}
+
+li a:hover {
+  text-decoration: underline;
+}
+
+/* 📱 Mobile */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 22px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+}
+
+/* 📱 Tablet */
+@media (min-width: 481px) and (max-width: 768px) {
+  .container {
+    max-width: 520px;
+  }
+}
+
+/* 💻 Laptop & above */
+@media (min-width: 769px) {
+  .container {
+    max-width: 600px;
+  }
+}

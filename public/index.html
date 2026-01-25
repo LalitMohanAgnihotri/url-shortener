@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>URL Shortener</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>URL Shortener</h1>
+      <form id="url">
+        <div>
+          <label for="longUrl">Enter URL:</label>
+          <input type="url" id="longUrl" name="longUrl" required />
+        </div>
+        <div>
+          <label for="customAlias">Custom Short URL (optional):</label>
+          <input type="text" id="customAlias" name="customAlias" />
+        </div>
+        <div class="btn">
+          <button type="submit">Short URL</button>
+        </div>
+      </form>
+      <h2>Shortened URL:</h2>
+      <ul id="shortenedUrls"></ul>
+    </div>
+    <script>
+      const fetchShortendURL = async () => {
+        const response = await fetch("/links");
+        const links = await response.json();
+        const list = document.getElementById("shortenedUrls");
+        list.innerHTML = "";
+        for (const [alias, longUrl] of Object.entries(links)) {
+          const listItem = document.createElement("li");
+          const shortUrl = `${window.location.origin}/${alias}`;
+          listItem.innerHTML = `<a href="${shortUrl}" target="_blank">${shortUrl}</a> - ${longUrl}`;
+          list.appendChild(listItem);
+        }
+      };
+
+      document
+        .getElementById("url")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+          const formData = new FormData(this);
+          const longUrl = formData.get("longUrl");
+          const constumUrl = formData.get("customAlias");
+          console.log(longUrl, constumUrl);
+          try {
+            const response = await fetch("/shorten", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ longUrl, customAlias: constumUrl }),
+            });
+
+            if (response.ok) {
+              fetchShortendURL();
+              alert("form submited successfully");
+            } else {
+              const errorMessage = await response.text();
+              alert("Error: " + errorMessage);
+            }
+          } catch (error) {
+            console.error("Error:", error);
+          }
+        });
+      fetchShortendURL();
+    </script>
+  </body>
+</html>
